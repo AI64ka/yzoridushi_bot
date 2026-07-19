@@ -19,7 +19,7 @@ load_dotenv()
 bot = Bot(token=os.getenv("BOT_TOKEN"))
 dp = Dispatcher()
 
-WEBAPP_URL = "https://ai64ka.github.io/yzoridushi_bot/"
+WEBAPP_URL = "https://ai64ka.github.io/yzoridushi_bot/?v=2"
 ADMIN_ID = int(os.getenv("ADMIN_ID", "0"))
 
 
