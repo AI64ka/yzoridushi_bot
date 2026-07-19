@@ -62,29 +62,29 @@
   <section id="paintings" class="active">
     <div class="section-title">Картины</div>
     <div class="grid">
-      <div class="card"><div class="img"></div><div class="body"><div class="title">Поток</div><div class="price">12 000 ₽</div><button>Заказать</button></div></div>
-      <div class="card"><div class="img"></div><div class="body"><div class="title">Равновесие</div><div class="price">15 000 ₽</div><button>Заказать</button></div></div>
+      <div class="card"><div class="img"></div><div class="body"><div class="title">Поток</div><div class="price">12 000 ₽</div><button class="order" data-item="Картина «Поток»" data-price="12 000 ₽">Заказать</button></div></div>
+      <div class="card"><div class="img"></div><div class="body"><div class="title">Равновесие</div><div class="price">15 000 ₽</div><button class="order" data-item="Картина «Равновесие»" data-price="15 000 ₽">Заказать</button></div></div>
     </div>
   </section>
 
   <section id="symbols">
     <div class="section-title">Энерго-символы</div>
     <div class="grid">
-      <div class="card"><div class="img"></div><div class="body"><div class="title">Защита</div><div class="price">Символ на заказ</div><button>Хочу такой</button></div></div>
-      <div class="card"><div class="img"></div><div class="body"><div class="title">Изобилие</div><div class="price">Символ на заказ</div><button>Хочу такой</button></div></div>
+      <div class="card"><div class="img"></div><div class="body"><div class="title">Защита</div><div class="price">Символ на заказ</div><button class="order" data-item="Символ «Защита»" data-price="Символ на заказ">Хочу такой</button></div></div>
+      <div class="card"><div class="img"></div><div class="body"><div class="title">Изобилие</div><div class="price">Символ на заказ</div><button class="order" data-item="Символ «Изобилие»" data-price="Символ на заказ">Хочу такой</button></div></div>
     </div>
   </section>
 
   <section id="courses">
     <div class="section-title">Обучение диджитал-рисованию</div>
-    <div class="card"><div class="body"><div class="title">Курс с нуля</div><div class="price">Онлайн, в удобном темпе</div><button>Записаться</button></div></div>
+    <div class="card"><div class="body"><div class="title">Курс с нуля</div><div class="price">Онлайн, в удобном темпе</div><button class="order" data-item="Обучение: курс с нуля" data-price="Онлайн">Записаться</button></div></div>
   </section>
 
   <section id="services">
     <div class="section-title">Услуги</div>
-    <div class="card"><div class="body"><div class="title">Арт-терапия</div><div class="price">Индивидуально</div><button>Записаться</button></div></div>
+    <div class="card"><div class="body"><div class="title">Арт-терапия</div><div class="price">Индивидуально</div><button class="order" data-item="Арт-терапия" data-price="Индивидуально">Записаться</button></div></div>
     <div style="height:12px"></div>
-    <div class="card"><div class="body"><div class="title">Личная консультация</div><div class="price">Онлайн</div><button>Записаться</button></div></div>
+    <div class="card"><div class="body"><div class="title">Личная консультация</div><div class="price">Онлайн</div><button class="order" data-item="Личная консультация" data-price="Онлайн">Записаться</button></div></div>
   </section>
 
   <script>
@@ -98,6 +98,16 @@
         document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
         btn.classList.add('active');
         document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    document.querySelectorAll('.order').forEach(btn => {
+      btn.addEventListener('click', () => {
+        tg.sendData(JSON.stringify({
+          type: 'order',
+          item: btn.dataset.item,
+          price: btn.dataset.price
+        }));
       });
     });
   </script>
