@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daniel Ramo</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    :root {
+      --bg: var(--tg-theme-bg-color, #ffffff);
+      --text: var(--tg-theme-text-color, #1a1a1a);
+      --hint: var(--tg-theme-hint-color, #8a8a8a);
+      --card: var(--tg-theme-secondary-bg-color, #f4f4f5);
+      --btn: var(--tg-theme-button-color, #7c5cff);
+      --btn-text: var(--tg-theme-button-text-color, #ffffff);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      padding: 16px; -webkit-tap-highlight-color: transparent;
+    }
+    header { text-align: center; padding: 12px 0 20px; }
+    header h1 { font-size: 22px; }
+    header p { color: var(--hint); font-size: 14px; margin-top: 4px; }
+    nav { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; }
+    nav button {
+      flex: 0 0 auto; border: none; border-radius: 20px;
+      padding: 8px 16px; font-size: 14px; cursor: pointer;
+      background: var(--card); color: var(--text);
+    }
+    nav button.active { background: var(--btn); color: var(--btn-text); }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .card { background: var(--card); border-radius: 16px; overflow: hidden; }
+    .card .img { height: 120px; background: linear-gradient(135deg, #7c5cff, #c86dd7); }
+    .card .body { padding: 10px; }
+    .card .title { font-size: 14px; font-weight: 600; }
+    .card .price { color: var(--hint); font-size: 13px; margin-top: 2px; }
+    .card button {
+      margin-top: 8px; width: 100%; border: none; border-radius: 10px;
+      padding: 8px; font-size: 13px; background: var(--btn);
+      color: var(--btn-text); cursor: pointer;
+    }
+    section { display: none; }
+    section.active { display: block; }
+    .section-title { font-size: 17px; font-weight: 600; margin: 8px 0 12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Daniel Ramo 🎨</h1>
+    <p>Энерго-символы · обучение · арт-терапия</p>
+  </header>
+
+  <nav>
+    <button class="tab active" data-tab="paintings">Картины</button>
+    <button class="tab" data-tab="symbols">Символы</button>
+    <button class="tab" data-tab="courses">Обучение</button>
+    <button class="tab" data-tab="services">Услуги</button>
+  </nav>
+
+  <section id="paintings" class="active">
+    <div class="section-title">Картины</div>
+    <div class="grid">
+      <div class="card"><div class="img"></div><div class="body"><div class="title">Поток</div><div class="price">12 000 ₽</div><button>Заказать</button></div></div>
+      <div class="card"><div class="img"></div><div class="body"><div class="title">Равновесие</div><div class="price">15 000 ₽</div><button>Заказать</button></div></div>
+    </div>
+  </section>
+
+  <section id="symbols">
+    <div class="section-title">Энерго-символы</div>
+    <div class="grid">
+      <div class="card"><div class="img"></div><div class="body"><div class="title">Защита</div><div class="price">Символ на заказ</div><button>Хочу такой</button></div></div>
+      <div class="card"><div class="img"></div><div class="body"><div class="title">Изобилие</div><div class="price">Символ на заказ</div><button>Хочу такой</button></div></div>
+    </div>
+  </section>
+
+  <section id="courses">
+    <div class="section-title">Обучение диджитал-рисованию</div>
+    <div class="card"><div class="body"><div class="title">Курс с нуля</div><div class="price">Онлайн, в удобном темпе</div><button>Записаться</button></div></div>
+  </section>
+
+  <section id="services">
+    <div class="section-title">Услуги</div>
+    <div class="card"><div class="body"><div class="title">Арт-терапия</div><div class="price">Индивидуально</div><button>Записаться</button></div></div>
+    <div style="height:12px"></div>
+    <div class="card"><div class="body"><div class="title">Личная консультация</div><div class="price">Онлайн</div><button>Записаться</button></div></div>
+  </section>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+    tg.expand();
+
+    document.querySelectorAll('.tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
