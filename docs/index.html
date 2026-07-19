@@ -13,7 +13,6 @@
       color:#f6f0ff; min-height:100vh; overflow-x:hidden;
       background:linear-gradient(180deg,#180b3c 0%,#0a0512 100%);
     }
-    /* fon-sloi */
     .aura{position:fixed;inset:-30%;z-index:0;pointer-events:none;
       background:
         radial-gradient(closest-side at 50% 10%,rgba(210,130,255,.55),transparent 70%),
@@ -31,19 +30,14 @@
         radial-gradient(1.2px 1.2px at 56% 84%,#ffd9f4,transparent),
         radial-gradient(1.1px 1.1px at 10% 72%,#fff,transparent),
         radial-gradient(1.3px 1.3px at 30% 40%,#fff2c8,transparent);
-      background-size:cover;animation:twinkle 3.6s ease-in-out infinite;}
+      animation:twinkle 3.6s ease-in-out infinite;}
     @keyframes twinkle{0%,100%{opacity:.4}50%{opacity:.95}}
-
-    /* zolotoy baget */
     .frame{position:fixed;inset:0;z-index:40;pointer-events:none;
       border:6px solid transparent;
       border-image:linear-gradient(135deg,#7a5a1e,#ffe7a8,#d9b877,#fff6e0,#b98f3f) 1;
       box-shadow:inset 0 0 26px rgba(255,210,130,.22);}
-    .frame2{position:fixed;inset:10px;z-index:40;pointer-events:none;
-      border:1px solid rgba(255,214,140,.35);}
-
+    .frame2{position:fixed;inset:10px;z-index:40;pointer-events:none;border:1px solid rgba(255,214,140,.35);}
     .wrap{position:relative;z-index:3;padding:26px 18px 30px;max-width:520px;margin:0 auto;}
-
     .emblem{width:88px;height:88px;margin:4px auto 12px;position:relative;}
     .emblem .rays{position:absolute;inset:0;border-radius:50%;
       background:
@@ -59,11 +53,125 @@
     @keyframes spinRev{to{transform:rotate(-360deg)}}
     @keyframes glow{0%,100%{filter:drop-shadow(0 0 16px rgba(255,205,120,.6))}50%{filter:drop-shadow(0 0 30px rgba(220,140,255,.85))}}
     @keyframes corePulse{0%,100%{transform:scale(.85);opacity:.85}50%{transform:scale(1.12);opacity:1}}
-
     .brand{text-align:center}
     .brand h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:36px;letter-spacing:.5px;
       background:linear-gradient(100deg,#e9c98a 0%,#fff6e0 38%,#ffe9b0 50%,#e9c98a 66%,#d9b877 100%);
       background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
       filter:drop-shadow(0 0 18px rgba(233,201,138,.35));animation:shimmer 5.5s linear infinite;}
     @keyframes shimmer{to{background-position:-220% center}}
-    .brand p{font-size:11px;letter-spacing:2.6px;text-transform:uppercase;color:#cbb8
+    .brand p{font-size:11px;letter-spacing:2.6px;text-transform:uppercase;color:#cbb8f2;margin-top:8px;font-weight:300}
+    .divider{display:flex;align-items:center;justify-content:center;gap:10px;margin:16px 0 4px}
+    .divider i{height:1px;width:70px;background:linear-gradient(90deg,transparent,rgba(255,214,130,.8))}
+    .divider i:last-child{background:linear-gradient(90deg,rgba(255,214,130,.8),transparent)}
+    .divider b{width:8px;height:8px;transform:rotate(45deg);background:linear-gradient(135deg,#ffe7a8,#e7a5ff);box-shadow:0 0 12px rgba(255,210,140,.9)}
+    nav{display:flex;gap:8px;overflow-x:auto;margin:16px 0 18px;padding-bottom:2px}
+    nav button{flex:0 0 auto;font-size:13px;padding:8px 16px;border-radius:20px;color:#d6c8f6;cursor:pointer;
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,214,140,.2);font-family:inherit}
+    nav button.active{color:#2a1233;font-weight:600;border-color:transparent;
+      background:linear-gradient(180deg,#ffe0a0,#e7a5ff);box-shadow:0 4px 20px rgba(230,160,255,.55)}
+    .section-title{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:700;margin:4px 2px 14px;color:#f4dcaa}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+    .card{position:relative;border-radius:18px;padding:1.2px;
+      background:linear-gradient(140deg,rgba(255,214,130,.7),rgba(210,150,255,.35),rgba(255,214,130,.15));
+      background-size:200% 200%;animation:borderGlow 6s ease infinite;box-shadow:0 14px 36px rgba(60,20,110,.5)}
+    @keyframes borderGlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+    .card .inner{border-radius:17px;overflow:hidden;background:#130a2c}
+    .art{height:120px;position:relative;overflow:hidden}
+    .art::before{content:'';position:absolute;inset:0;
+      background:repeating-conic-gradient(from 0deg,rgba(255,255,255,.16) 0deg 1deg,transparent 1deg 7deg);
+      -webkit-mask:radial-gradient(circle,#000 6%,transparent 60%);mask:radial-gradient(circle,#000 6%,transparent 60%)}
+    .art::after{content:'';position:absolute;top:-60%;left:-40%;width:55%;height:220%;transform:rotate(20deg);
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);animation:sweep 5s ease-in-out infinite}
+    @keyframes sweep{0%,60%{left:-45%}100%{left:130%}}
+    .g1{background:radial-gradient(circle at 50% 46%,#ffefb0,#c05cff 50%,#2a1258)}
+    .g2{background:radial-gradient(circle at 50% 46%,#c8f4ff,#3f8fe6 52%,#14235e)}
+    .g3{background:radial-gradient(circle at 50% 46%,#ffdca8,#ff5cc4 52%,#4a1350)}
+    .g4{background:radial-gradient(circle at 50% 46%,#d0ffe0,#22c39a 52%,#123f52)}
+    .g5{background:radial-gradient(circle at 50% 46%,#e0c8ff,#7b4fd0 52%,#231052)}
+    .body{padding:11px 12px 13px}
+    .body .t{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:#f8f2ff}
+    .body .p{font-size:11px;color:#c4b1e8;margin-top:1px}
+    .order{position:relative;overflow:hidden;margin-top:10px;width:100%;text-align:center;font-size:13px;padding:9px;
+      border:none;border-radius:11px;color:#2a1233;font-weight:600;font-family:inherit;cursor:pointer;
+      background:linear-gradient(180deg,#ffe0a0,#e3a0ff);box-shadow:0 6px 20px rgba(220,150,255,.4)}
+    .order::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;transform:skewX(-20deg);
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent);animation:shine 4.5s ease-in-out infinite}
+    @keyframes shine{0%,55%{left:-60%}100%{left:130%}}
+    .order.flash{animation:tap .25s ease}
+    @keyframes tap{0%{filter:brightness(1)}35%{filter:brightness(1.9)}100%{filter:brightness(1)}}
+    section{display:none}
+    section.active{display:block}
+    .stack .card{margin-bottom:13px}
+  </style>
+</head>
+<body>
+  <div class="aura"></div>
+  <div class="stars"></div>
+  <div class="frame"></div>
+  <div class="frame2"></div>
+  <div class="wrap">
+    <div class="emblem"><div class="rays"></div><div class="ring"></div><div class="core"></div></div>
+    <div class="brand"><h1>Daniel&nbsp;Ramo</h1><p>энерго-символы · арт-терапия</p></div>
+    <div class="divider"><i></i><b></b><i></i></div>
+    <nav>
+      <button class="tab active" data-tab="paintings">Картины</button>
+      <button class="tab" data-tab="symbols">Символы</button>
+      <button class="tab" data-tab="courses">Обучение</button>
+      <button class="tab" data-tab="services">Услуги</button>
+    </nav>
+    <section id="paintings" class="active">
+      <div class="section-title">Картины</div>
+      <div class="grid">
+        <div class="card"><div class="inner"><div class="art g1"></div><div class="body"><div class="t">Поток</div><div class="p">12 000 ₽</div><button class="order" data-item="Картина «Поток»" data-price="12 000 ₽">Заказать</button></div></div></div>
+        <div class="card"><div class="inner"><div class="art g3"></div><div class="body"><div class="t">Равновесие</div><div class="p">15 000 ₽</div><button class="order" data-item="Картина «Равновесие»" data-price="15 000 ₽">Заказать</button></div></div></div>
+      </div>
+    </section>
+    <section id="symbols">
+      <div class="section-title">Энерго-символы</div>
+      <div class="grid">
+        <div class="card"><div class="inner"><div class="art g4"></div><div class="body"><div class="t">Защита</div><div class="p">Символ на заказ</div><button class="order" data-item="Символ «Защита»" data-price="Символ на заказ">Хочу такой</button></div></div></div>
+        <div class="card"><div class="inner"><div class="art g5"></div><div class="body"><div class="t">Изобилие</div><div class="p">Символ на заказ</div><button class="order" data-item="Символ «Изобилие»" data-price="Символ на заказ">Хочу такой</button></div></div></div>
+      </div>
+    </section>
+    <section id="courses">
+      <div class="section-title">Обучение диджитал-рисованию</div>
+      <div class="stack">
+        <div class="card"><div class="inner"><div class="art g2"></div><div class="body"><div class="t">Курс с нуля</div><div class="p">Онлайн, в удобном темпе</div><button class="order" data-item="Обучение: курс с нуля" data-price="Онлайн">Записаться</button></div></div></div>
+      </div>
+    </section>
+    <section id="services">
+      <div class="section-title">Услуги</div>
+      <div class="stack">
+        <div class="card"><div class="inner"><div class="art g1"></div><div class="body"><div class="t">Арт-терапия</div><div class="p">Индивидуально</div><button class="order" data-item="Арт-терапия" data-price="Индивидуально">Записаться</button></div></div></div>
+        <div class="card"><div class="inner"><div class="art g3"></div><div class="body"><div class="t">Личная консультация</div><div class="p">Онлайн</div><button class="order" data-item="Личная консультация" data-price="Онлайн">Записаться</button></div></div></div>
+      </div>
+    </section>
+  </div>
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+    tg.expand();
+    try { tg.setBackgroundColor('#0a0512'); tg.setHeaderColor('#140b3c'); } catch(e) {}
+    document.querySelectorAll('.tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+        try { tg.HapticFeedback.selectionChanged(); } catch(e) {}
+      });
+    });
+    document.querySelectorAll('.order').forEach(btn => {
+      btn.addEventListener('click', () => {
+        try { tg.HapticFeedback.impactOccurred('medium'); } catch(e) {}
+        btn.classList.add('flash');
+        const payload = JSON.stringify({ type:'order', item:btn.dataset.item, price:btn.dataset.price });
+        setTimeout(() => {
+          try { tg.HapticFeedback.notificationOccurred('success'); } catch(e) {}
+          tg.sendData(payload);
+        }, 240);
+      });
+    });
+  </script>
+</body>
+</html>
