@@ -7,6 +7,8 @@ from aiogram.types import (
     CallbackQuery,
     InlineKeyboardMarkup,
     InlineKeyboardButton,
+    WebAppInfo,
+    MenuButtonWebApp,
 )
 from aiogram.filters import CommandStart
 
@@ -15,19 +17,21 @@ load_dotenv()
 bot = Bot(token=os.getenv("BOT_TOKEN"))
 dp = Dispatcher()
 
+WEBAPP_URL = "https://ai64ka.github.io/yzoridushi_bot/"
 
-# Разделы: код кнопки -> текст, который покажем при нажатии
+
 SECTIONS = {
-    "paintings": "🖼 Картины — здесь будет каталог работ художницы. Скоро!",
-    "courses": "🎨 Обучение диджитал-рисованию — описание курса появится здесь.",
-    "arttherapy": "🧘 Арт-терапия — запись откроется в мини-аппе.",
-    "consult": "💬 Личная консультация — скоро можно будет записаться.",
-    "merch": "🛍 Мерч — товары появятся здесь.",
+    "paintings": "🖼 Картины — открой витрину кнопкой выше, чтобы посмотреть работы.",
+    "courses": "🎨 Обучение диджитал-рисованию — подробности в витрине.",
+    "arttherapy": "🧘 Арт-терапия — запись в витрине.",
+    "consult": "💬 Личная консультация — запись в витрине.",
+    "merch": "🛍 Мерч — товары в витрине.",
 }
 
 
 def main_menu() -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="🎨 Открыть витрину", web_app=WebAppInfo(url=WEBAPP_URL))],
         [InlineKeyboardButton(text="🖼 Картины", callback_data="paintings")],
         [InlineKeyboardButton(text="🎨 Обучение рисованию", callback_data="courses")],
         [InlineKeyboardButton(text="🧘 Арт-терапия", callback_data="arttherapy")],
@@ -39,7 +43,7 @@ def main_menu() -> InlineKeyboardMarkup:
 @dp.message(CommandStart())
 async def start(message: Message):
     await message.answer(
-        "Привет! Это бот Daniel Ramo 🎨\n\nВыбери, что тебя интересует:",
+        "Привет! Это бот Daniel Ramo 🎨\n\nНажми «Открыть витрину», чтобы посмотреть работы и записаться:",
         reply_markup=main_menu(),
     )
 
@@ -51,6 +55,10 @@ async def section_handler(callback: CallbackQuery):
 
 
 async def main():
+    # постоянная кнопка "Витрина" рядом с полем ввода
+    await bot.set_chat_menu_button(
+        menu_button=MenuButtonWebApp(text="Витрина", web_app=WebAppInfo(url=WEBAPP_URL))
+    )
     await dp.start_polling(bot)
 
 
