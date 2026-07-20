@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Daniel Ramo — свет</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@300;400;500&display=swap');
+    *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+    body{font-family:'Manrope',-apple-system,system-ui,sans-serif;color:#3b2b4d;min-height:100vh;overflow-x:hidden;
+      background:linear-gradient(180deg,#fdf8f0 0%,#f4ecf8 100%)}
+    .aura{position:fixed;inset:-30%;z-index:0;pointer-events:none;
+      background:
+        radial-gradient(closest-side at 50% 8%,rgba(255,214,140,.35),transparent 70%),
+        radial-gradient(closest-side at 84% 20%,rgba(224,150,255,.22),transparent 70%),
+        radial-gradient(closest-side at 12% 34%,rgba(140,200,255,.18),transparent 70%),
+        radial-gradient(closest-side at 60% 80%,rgba(255,150,210,.18),transparent 70%);
+      filter:blur(10px);animation:breathe 12s ease-in-out infinite}
+    @keyframes breathe{0%,100%{transform:scale(1) rotate(0);opacity:.9}50%{transform:scale(1.12) rotate(8deg);opacity:1}}
+    .sacred{position:fixed;top:50%;left:50%;width:150vh;height:150vh;transform:translate(-50%,-50%);
+      z-index:1;pointer-events:none;opacity:.08;border-radius:50%;
+      background:repeating-conic-gradient(from 0deg,rgba(200,150,70,.8) 0deg .25deg,transparent .25deg 6deg);
+      -webkit-mask:radial-gradient(circle,transparent 17%,#000 25%,#000 55%,transparent 70%);
+              mask:radial-gradient(circle,transparent 17%,#000 25%,#000 55%,transparent 70%);
+      animation:spinSlow 140s linear infinite}
+    @keyframes spinSlow{to{transform:translate(-50%,-50%) rotate(360deg)}}
+    .frame{position:fixed;inset:0;z-index:40;pointer-events:none;border:6px solid transparent;
+      border-image:linear-gradient(135deg,#c8912e,#ffe7a8,#d9b877,#fff6e0,#b98f3f) 1;box-shadow:inset 0 0 26px rgba(200,150,70,.15)}
+    .frame2{position:fixed;inset:10px;z-index:40;pointer-events:none;border:1px solid rgba(200,150,70,.3)}
+    .wrap{position:relative;z-index:3;padding:26px 18px 34px;max-width:520px;margin:0 auto}
+    .emblem{width:84px;height:84px;margin:4px auto 12px;position:relative;border-radius:50%;
+      background:radial-gradient(circle at 50% 50%,rgba(255,224,150,1) 0%,rgba(224,150,255,.5) 22%,transparent 56%),
+        repeating-conic-gradient(from 0deg,rgba(210,160,70,.9) 0deg 1.4deg,transparent 1.4deg 9deg);
+      -webkit-mask:radial-gradient(circle,#000 30%,rgba(0,0,0,.4) 52%,transparent 72%);
+              mask:radial-gradient(circle,#000 30%,rgba(0,0,0,.4) 52%,transparent 72%);
+      animation:spin 26s linear infinite;filter:drop-shadow(0 0 14px rgba(230,180,90,.45))}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .brand{text-align:center}
+    .brand h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:35px;
+      background:linear-gradient(100deg,#b07d2e,#e6b45a,#8a4fb0,#b07d2e);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .brand p{font-size:11px;letter-spacing:2.6px;text-transform:uppercase;color:#9a86ad;margin-top:8px;font-weight:400}
+    .divider{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0 4px}
+    .divider i{height:1px;width:66px;background:linear-gradient(90deg,transparent,rgba(200,150,70,.7))}
+    .divider i:last-child{background:linear-gradient(90deg,rgba(200,150,70,.7),transparent)}
+    .divider b{width:8px;height:8px;transform:rotate(45deg);background:linear-gradient(135deg,#e6b45a,#c86dd7)}
+    nav{display:flex;gap:8px;overflow-x:auto;margin:16px 0 18px;padding-bottom:2px}
+    nav button{flex:0 0 auto;font-size:13px;padding:8px 16px;border-radius:20px;color:#6a5878;cursor:pointer;
+      background:#fff;border:1px solid rgba(160,120,180,.18);font-family:inherit}
+    nav button.active{color:#fff;font-weight:600;border-color:transparent;
+      background:linear-gradient(180deg,#b46bff,#e06cc0);box-shadow:0 4px 16px rgba(190,110,220,.4)}
+    .section-title{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:700;margin:4px 2px 14px;color:#7a4fa0}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+    .card{border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 10px 26px rgba(150,110,180,.16);border:1px solid rgba(200,160,90,.16)}
+    .art{height:120px;position:relative;overflow:hidden}
+    .art::after{content:'';position:absolute;top:-60%;left:-40%;width:55%;height:220%;transform:rotate(20deg);
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);animation:sweep 5s ease-in-out infinite}
+    @keyframes sweep{0%,60%{left:-45%}100%{left:130%}}
+    .g1{background:radial-gradient(circle at 50% 45%,#ffe27a,#c05cff 55%,#6a2fb0)}
+    .g2{background:radial-gradient(circle at 50% 45%,#a7ecff,#3f8fe6 55%,#2a4fb0)}
+    .g3{background:radial-gradient(circle at 50% 45%,#ffd0a0,#ff5cc4 55%,#b0357a)}
+    .g4{background:radial-gradient(circle at 50% 45%,#b6ffd0,#22c39a 55%,#1a8f7a)}
+    .g5{background:radial-gradient(circle at 50% 45%,#e0c8ff,#7b4fd0 55%,#3a1a90)}
+    .body{padding:11px 12px 13px}
+    .body .t{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:#3b2b4d}
+    .body .p{font-size:11px;color:#9a86ad;margin-top:1px}
+    .order{position:relative;overflow:hidden;margin-top:10px;width:100%;text-align:center;font-size:13px;padding:9px;
+      border:none;border-radius:11px;color:#fff;font-weight:600;font-family:inherit;cursor:pointer;
+      background:linear-gradient(180deg,#b46bff,#e06cc0);box-shadow:0 5px 16px rgba(190,110,220,.38);transition:transform .1s}
+    .order::before{content:'✦ ';opacity:.9}
+    .order:active{transform:scale(.97)}
+    section{display:none} section.active{display:block} .stack .card{margin-bottom:13px}
+  </style>
+</head>
+<body>
+  <div class="aura"></div>
+  <div class="sacred"></div>
+  <div class="frame"></div>
+  <div class="frame2"></div>
+  <div class="wrap">
+    <div class="emblem"></div>
+    <div class="brand"><h1>Daniel&nbsp;Ramo</h1><p>энерго-символы · арт-терапия</p></div>
+    <div class="divider"><i></i><b></b><i></i></div>
+    <nav>
+      <button class="tab active" data-tab="paintings">Картины</button>
+      <button class="tab" data-tab="symbols">Символы</button>
+      <button class="tab" data-tab="courses">Обучение</button>
+      <button class="tab" data-tab="services">Услуги</button>
+    </nav>
+    <section id="paintings" class="active">
+      <div class="section-title">Картины</div>
+      <div class="grid">
+        <div class="card"><div class="art g1"></div><div class="body"><div class="t">Поток</div><div class="p">12 000 ₽</div><button class="order">Заказать</button></div></div>
+        <div class="card"><div class="art g3"></div><div class="body"><div class="t">Равновесие</div><div class="p">15 000 ₽</div><button class="order">Заказать</button></div></div>
+      </div>
+    </section>
+    <section id="symbols">
+      <div class="section-title">Энерго-символы</div>
+      <div class="grid">
+        <div class="card"><div class="art g4"></div><div class="body"><div class="t">Защита</div><div class="p">Символ на заказ</div><button class="order">Хочу такой</button></div></div>
+        <div class="card"><div class="art g5"></div><div class="body"><div class="t">Изобилие</div><div class="p">Символ на заказ</div><button class="order">Хочу такой</button></div></div>
+      </div>
+    </section>
+    <section id="courses">
+      <div class="section-title">Обучение диджитал-рисованию</div>
+      <div class="stack"><div class="card"><div class="art g2"></div><div class="body"><div class="t">Курс с нуля</div><div class="p">Онлайн, в удобном темпе</div><button class="order">Записаться</button></div></div></div>
+    </section>
+    <section id="services">
+      <div class="section-title">Услуги</div>
+      <div class="stack">
+        <div class="card"><div class="art g1"></div><div class="body"><div class="t">Арт-терапия</div><div class="p">Индивидуально</div><button class="order">Записаться</button></div></div>
+        <div class="card"><div class="art g3"></div><div class="body"><div class="t">Личная консультация</div><div class="p">Онлайн</div><button class="order">Записаться</button></div></div>
+      </div>
+    </section>
+  </div>
+  <script>
+    const tg = window.Telegram.WebApp; try{tg.ready();tg.expand();}catch(e){}
+    document.querySelectorAll('.tab').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+        document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
