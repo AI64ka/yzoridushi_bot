@@ -22,6 +22,19 @@ dp = Dispatcher()
 WEBAPP_URL = "https://ai64ka.github.io/yzoridushi_bot/?v=3"
 ADMIN_ID = int(os.getenv("ADMIN_ID", "0"))
 
+GREETING = (
+    "✦ <b>Daniel Ramo</b> ✦\n"
+    "<i>энерго-символы · живопись · арт-терапия</i>\n"
+    "— ✧ — ✧ — ✧ —\n\n"
+    "Добро пожаловать в пространство света и символов 🤍\n\n"
+    "Здесь ты можешь:\n"
+    "• выбрать <b>картину</b>\n"
+    "• заказать личный <b>энерго-символ</b>\n"
+    "• записаться на <b>обучение</b> рисованию\n"
+    "• прийти на <b>арт-терапию</b> или консультацию\n\n"
+    "Нажми <b>«Открыть витрину»</b> ниже ✧"
+)
+
 
 def init_db():
     conn = sqlite3.connect("orders.db")
@@ -51,18 +64,14 @@ def save_order(user_id, username, item, price):
 
 def main_keyboard() -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
-        keyboard=[[KeyboardButton(text="🎨 Открыть витрину", web_app=WebAppInfo(url=WEBAPP_URL))]],
+        keyboard=[[KeyboardButton(text="✦ Открыть витрину ✦", web_app=WebAppInfo(url=WEBAPP_URL))]],
         resize_keyboard=True,
     )
 
 
 @dp.message(CommandStart())
 async def start(message: Message):
-    await message.answer(
-        "Привет! Это бот Daniel Ramo 🎨\n\n"
-        "Нажми «Открыть витрину», выбери работу или услугу и оставь заявку:",
-        reply_markup=main_keyboard(),
-    )
+    await message.answer(GREETING, parse_mode="HTML", reply_markup=main_keyboard())
 
 
 @dp.message(Command("id"))
@@ -80,15 +89,18 @@ async def on_order(message: Message):
     save_order(user.id, user.username, item, price)
 
     await message.answer(
-        f"Спасибо! Заявка принята ✅\n\n{item} — {price}\n"
-        "Художница скоро свяжется с тобой."
+        "✧ <b>Заявка принята</b> ✧\n\n"
+        f"<b>{item}</b>\n{price}\n\n"
+        "Художница скоро свяжется с тобой лично 🤍",
+        parse_mode="HTML",
     )
 
     if ADMIN_ID:
         who = f"@{user.username}" if user.username else user.full_name
         await bot.send_message(
             ADMIN_ID,
-            f"🔔 Новая заявка!\n\n{item} — {price}\nОт: {who} (id {user.id})",
+            f"🔔 <b>Новая заявка</b>\n\n<b>{item}</b> — {price}\nОт: {who} (id {user.id})",
+            parse_mode="HTML",
         )
 
 
