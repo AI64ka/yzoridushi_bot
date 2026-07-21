@@ -28,13 +28,15 @@ nav button{flex:0 0 auto;font-size:13px;padding:8px 15px;border-radius:20px;colo
 nav button.active{color:#2a1233;font-weight:600;border-color:transparent;background:linear-gradient(180deg,#ffe0a0,#e7a5ff)}
 .section-title{font-family:Georgia,serif;font-size:22px;font-weight:700;margin:2px 2px 14px;color:#f4dcaa}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.grid.stack{grid-template-columns:1fr}
 .card{border-radius:18px;overflow:hidden;background:#130a2c;border:1px solid rgba(205,165,255,.24);box-shadow:0 12px 30px rgba(50,20,90,.5)}
-.art{height:150px;background:#1a1140;position:relative}
+.art{height:160px;background:#1a1140;position:relative}
+.grid.stack .art{height:220px}
 .art img{width:100%;height:100%;object-fit:cover;display:block}
 .body{padding:10px 11px 12px}
 .body .t{font-family:Georgia,serif;font-size:15px;font-weight:600;color:#f8f2ff;line-height:1.2}
 .body .p{font-size:12px;color:#f0d9a8;margin-top:3px;font-weight:600}
-.order{position:relative;overflow:hidden;margin-top:9px;width:100%;font-size:12px;padding:8px;border:none;border-radius:10px;color:#2a1233;font-weight:600;font-family:inherit;cursor:pointer;background:linear-gradient(180deg,#ffe0a0,#e3a0ff);box-shadow:0 5px 16px rgba(230,160,255,.4);transition:transform .1s}
+.order{position:relative;overflow:hidden;margin-top:9px;width:100%;font-size:12px;padding:9px;border:none;border-radius:10px;color:#2a1233;font-weight:600;font-family:inherit;cursor:pointer;background:linear-gradient(180deg,#ffe0a0,#e3a0ff);box-shadow:0 5px 16px rgba(230,160,255,.4);transition:transform .1s}
 .order::before{content:'✦ '}
 .order:active{transform:scale(.97)}
 .order.flash{animation:tap .25s ease}
@@ -67,9 +69,8 @@ const DATA=[
    {img:'tild6535-6432-4432-b965-366666643363/photo_2022-07-27_23-.jpg',t:'Картина',p:'по запросу'},
    {img:'tild3164-3035-4864-a363-333233306331/photo_2022-07-27_23-.jpg',t:'Картина',p:'по запросу'}
  ]},
- {id:'therapy',tab:'Арт-терапия',title:'Сессии арт-терапии',items:[
-   {img:'tild6232-3838-4530-b562-643766623966/Untitled-1_.jpg',t:'Чакральная диагностика',p:'по запросу'},
-   {img:'tild3133-3135-4338-a337-323333663465/IMG_1371.jpg',t:'Сессия арт-терапии',p:'по запросу'}
+ {id:'therapy',tab:'Арт-терапия',title:'Арт-терапия',stack:true,items:[
+   {img:'tild6232-3838-4530-b562-643766623966/Untitled-1_.jpg',t:'Чакральная диагностика',p:'по запросу'}
  ]}
 ];
 const nav=document.getElementById('nav'), content=document.getElementById('content');
@@ -80,7 +81,7 @@ DATA.forEach((s,idx)=>{
   b.onclick=()=>{[...nav.children].forEach(x=>x.classList.remove('active'));[...content.children].forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('sec-'+s.id).classList.add('active');try{tg.HapticFeedback.selectionChanged();}catch(e){}};
   nav.appendChild(b);
   const sec=document.createElement('section'); sec.id='sec-'+s.id; if(idx===0)sec.className='active';
-  let html='<div class="section-title">'+s.title+'</div><div class="grid">';
+  let html='<div class="section-title">'+s.title+'</div><div class="grid'+(s.stack?' stack':'')+'">';
   s.items.forEach(it=>{html+='<div class="card"><div class="art"><img loading="lazy" src="'+CDN+it.img+'"></div><div class="body"><div class="t">'+it.t+'</div><div class="p">'+it.p+'</div><button class="order" data-i="'+it.t+'" data-p="'+it.p+'">Заказать</button></div></div>';});
   html+='</div>'; sec.innerHTML=html; content.appendChild(sec);
 });
