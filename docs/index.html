@@ -52,13 +52,12 @@ section{display:none}section.active{display:block}
 <div id="content"></div>
 </div>
 <script>
-// ====== КАТАЛОГ: правь названия и цены здесь ======
 const CDN='https://static.tildacdn.com/';
 const DATA=[
  {id:'portrait',tab:'Энергопортрет',title:'Энергопортрет — вибрационный узор души',items:[
    {img:'tild3361-6561-4963-a133-663635616236/1.jpg',t:'Тариф «Базовый»',p:'28 888 ₽'},
    {img:'tild6630-6266-4264-a539-653234346266/2.jpg',t:'Тариф «Стандарт»',p:'34 444 ₽'},
-   {img:'tild3933-6665-4864-a361-343435336161/3.jpg',t:'Тариф «VIP»',p:'по запросу'},
+   {img:'tild3933-6665-4864-a361-343435336161/3.jpg',t:'Тариф «VIP»',p:'по запросу'}
  ]},
  {id:'paintings',tab:'Картины',title:'Серия «Чувства космоса»',items:[
    {img:'tild3136-3039-4839-a264-363964306261/photo_2022-07-27_23-.jpg',t:'Картина',p:'по запросу'},
@@ -66,16 +65,18 @@ const DATA=[
    {img:'tild3162-6635-4863-b239-653261663134/photo_2022-07-27_23-.jpg',t:'Картина',p:'по запросу'},
    {img:'tild3361-6165-4433-b930-663961316430/photo_2022-07-27_23-.jpg',t:'Картина',p:'по запросу'},
    {img:'tild6535-6432-4432-b965-366666643363/photo_2022-07-27_23-.jpg',t:'Картина',p:'по запросу'},
-   {img:'tild3164-3035-4864-a363-333233306331/photo_2022-07-27_23-.jpg',t:'Картина',p:'по запросу'},
+   {img:'tild3164-3035-4864-a363-333233306331/photo_2022-07-27_23-.jpg',t:'Картина',p:'по запросу'}
  ]},
  {id:'therapy',tab:'Арт-терапия',title:'Сессии арт-терапии',items:[
    {img:'tild6232-3838-4530-b562-643766623966/Untitled-1_.jpg',t:'Чакральная диагностика',p:'по запросу'},
-   {img:'tild3133-3135-4338-a337-323333663465/IMG_1371.jpg',t:'Сессия арт-терапии',p:'по запросу'},
+   {img:'tild3133-3135-4338-a337-323333663465/IMG_1371.jpg',t:'Сессия арт-терапии',p:'по запросу'}
+ ]}
 ];
-// ==================================================
 const nav=document.getElementById('nav'), content=document.getElementById('content');
+const tg=window.Telegram.WebApp; tg.ready(); tg.expand();
+try{tg.setBackgroundColor('#0a0512');tg.setHeaderColor('#140b3c');}catch(e){}
 DATA.forEach((s,idx)=>{
-  const b=document.createElement('button'); b.textContent=s.tab; b.className=idx===0?'active':'';
+  const b=document.createElement('button'); b.textContent=s.tab; if(idx===0)b.className='active';
   b.onclick=()=>{[...nav.children].forEach(x=>x.classList.remove('active'));[...content.children].forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('sec-'+s.id).classList.add('active');try{tg.HapticFeedback.selectionChanged();}catch(e){}};
   nav.appendChild(b);
   const sec=document.createElement('section'); sec.id='sec-'+s.id; if(idx===0)sec.className='active';
@@ -83,8 +84,6 @@ DATA.forEach((s,idx)=>{
   s.items.forEach(it=>{html+='<div class="card"><div class="art"><img loading="lazy" src="'+CDN+it.img+'"></div><div class="body"><div class="t">'+it.t+'</div><div class="p">'+it.p+'</div><button class="order" data-i="'+it.t+'" data-p="'+it.p+'">Заказать</button></div></div>';});
   html+='</div>'; sec.innerHTML=html; content.appendChild(sec);
 });
-const tg=window.Telegram.WebApp; tg.ready(); tg.expand();
-try{tg.setBackgroundColor('#0a0512');tg.setHeaderColor('#140b3c');}catch(e){}
 document.querySelectorAll('.order').forEach(b=>b.addEventListener('click',()=>{
   try{tg.HapticFeedback.impactOccurred('medium');}catch(e){}b.classList.add('flash');
   const p=JSON.stringify({type:'order',item:b.dataset.i,price:b.dataset.p});
